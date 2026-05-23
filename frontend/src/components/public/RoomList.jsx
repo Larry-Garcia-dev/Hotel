@@ -1,46 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import roomService from '../../services/roomService';
+import React from 'react';
 import './RoomList.css';
 
+const defaultRooms = [
+  {
+    id: 1,
+    name: 'Two Double Beds',
+    tag: 'Up to 4 guests',
+    description: 'Room for families or small groups, with space to relax after a day in Washington, DC.',
+    imageClass: 'double'
+  },
+  {
+    id: 2,
+    name: 'One King Bed',
+    tag: 'Best for 1-2 guests',
+    description: 'A comfortable option for solo travelers or couples looking for a quiet stay.',
+    imageClass: 'king'
+  },
+  {
+    id: 3,
+    name: 'Accessible Room',
+    tag: 'Accessible stay',
+    description: 'ADA-friendly room designed for easier access and a more comfortable experience.',
+    imageClass: 'accessible'
+  }
+];
+
 function RoomList() {
-  const [roomTypes, setRoomTypes] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadRoomTypes();
-  }, []);
-
-  async function loadRoomTypes() {
-    try {
-      const data = await roomService.getRoomTypes();
-      setRoomTypes(data);
-    } catch (error) {
-      console.error('Error loading room types:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  if (loading) {
-    return <div className="loading">Cargando habitaciones...</div>;
-  }
-
   return (
-    <section className="rooms section" id="rooms">
+    <section className="section" id="rooms">
       <div className="container">
-        <div className="section-header">
+        <div className="section-heading">
           <div>
-            <p className="eyebrow">Habitaciones</p>
-            <h2>Simples, comodas, listas para tu estancia.</h2>
+            <p className="eyebrow">Rooms</p>
+            <h2>Simple, comfortable, ready for your stay.</h2>
           </div>
-          <p className="section-desc">
-            Cada habitacion incluye aire acondicionado, bano privado, 
-            refrigerador/microondas, TV LCD y lo esencial.
+          <p>
+            Each room includes air conditioning, private bathroom,
+            fridge/microwave, LCD TV, and essentials for a practical stay.
           </p>
         </div>
 
         <div className="room-grid">
-          {roomTypes.map((room) => (
+          {defaultRooms.map((room) => (
             <RoomCard key={room.id} room={room} />
           ))}
         </div>
@@ -51,16 +52,13 @@ function RoomList() {
 
 function RoomCard({ room }) {
   return (
-    <article className="room-card card">
-      <div className="room-image" />
+    <article className="room-card">
+      <div className={`room-image ${room.imageClass}`} aria-hidden="true"></div>
       <div className="room-body">
-        <span className="room-tag">Hasta {room.max_guests} huespedes</span>
+        <span className="tag">{room.tag}</span>
         <h3>{room.name}</h3>
         <p>{room.description}</p>
-        <div className="room-footer">
-          <span className="room-price">${room.base_price}/noche</span>
-          <a href="#availability" className="btn btn-outline-dark">Reservar</a>
-        </div>
+        <a className="room-button" href="#contact">Book This Room</a>
       </div>
     </article>
   );

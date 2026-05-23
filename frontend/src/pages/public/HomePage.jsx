@@ -3,8 +3,9 @@ import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import Hero from '../../components/public/Hero';
 import Amenities from '../../components/public/Amenities';
-import RoomList from '../../components/public/RoomList';
 import AvailabilityForm from '../../components/public/AvailabilityForm';
+import RoomList from '../../components/public/RoomList';
+import Attractions from '../../components/public/Attractions';
 import Contact from '../../components/public/Contact';
 
 function HomePage() {
@@ -13,9 +14,10 @@ function HomePage() {
       <Header />
       <main>
         <Hero />
-        <Amenities />
         <AvailabilityForm />
+        <Amenities />
         <RoomList />
+        <Attractions />
         <Contact />
       </main>
       <Footer />

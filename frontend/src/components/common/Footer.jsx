@@ -5,13 +5,8 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container footer-inner">
-        <div className="footer-brand">
-          <div className="brand-logo">GH</div>
-          <span>Gateway Hotel</span>
-        </div>
-        <p className="footer-copy">
-          2024 Gateway Hotel. Todos los derechos reservados.
-        </p>
+        <img src="/images/logo_gatewayhotel.png" alt="Gateway Hotel" />
+        <span>Gateway Hotel &middot; Washington, DC &middot; Reservations &middot; Guest Services</span>
       </div>
     </footer>
   );

@@ -1,0 +1,64 @@
+.nearby {
+  background: var(--white);
+}
+
+.nearby h2 {
+  margin: 12px 0 0;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.05;
+}
+
+.attraction-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.attraction-card {
+  overflow: hidden;
+  position: relative;
+  min-height: 112px;
+  display: flex;
+  align-items: end;
+  border-radius: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 24px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.attraction-card.thumbnail {
+  min-height: 180px;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.02), rgba(15, 23, 42, 0.74)),
+    var(--paper);
+  color: var(--white);
+}
+
+.attraction-card.thumbnail img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.attraction-card.thumbnail span {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 960px) {
+  .attraction-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .attraction-grid {
+    grid-template-columns: 1fr;
+  }
+}
