@@ -1,6 +1,6 @@
 import * as chatModel from '../models/chatModel.js';
 
-const QWEN_API_URL = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1';
+const QWEN_API_URL = 'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions';
 
 const SYSTEM_PROMPT = `You are a helpful assistant for Gateway Hotel, a modern hotel with easy access to Washington, DC. 
 
