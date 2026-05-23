@@ -91,4 +91,37 @@ export async function checkAvailability(checkIn, checkOut, roomTypeId = null) {
   return rows;
 }
 
-export default { findAll, findById, create, update, remove, checkAvailability };
+export async function findAvailable(checkIn, checkOut, roomType = null) {
+  const pool = getPool();
+  
+  const roomTypeMap = {
+    'king': 'One King Bed',
+    'double': 'Two Double Beds',
+    'accessible': 'Accessible Room'
+  };
+  
+  let query = `
+    SELECT r.id, r.room_number, r.floor, rt.name as type_name, rt.base_price, rt.max_guests
+    FROM rooms r
+    JOIN room_types rt ON r.room_type_id = rt.id
+    WHERE r.status = 'available'
+    AND r.id NOT IN (
+      SELECT room_id FROM reservations 
+      WHERE status NOT IN ('cancelled', 'checked_out')
+      AND check_in < ? AND check_out > ?
+    )
+  `;
+  const params = [checkOut, checkIn];
+
+  if (roomType && roomTypeMap[roomType]) {
+    query += ' AND rt.name = ?';
+    params.push(roomTypeMap[roomType]);
+  }
+  
+  query += ' ORDER BY rt.base_price ASC, r.room_number ASC';
+
+  const [rows] = await pool.query(query, params);
+  return rows;
+}
+
+export default { findAll, findById, create, update, remove, checkAvailability, findAvailable };

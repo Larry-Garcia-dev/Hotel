@@ -20,6 +20,15 @@ export const roomService = {
     const params = new URLSearchParams({ check_in: checkIn, check_out: checkOut });
     if (roomTypeId) params.append('room_type_id', roomTypeId);
     return api.get(`/rooms/availability?${params}`);
+  },
+  
+  getAvailable: (searchData) => {
+    const params = new URLSearchParams({
+      check_in: searchData.checkIn,
+      check_out: searchData.checkOut
+    });
+    if (searchData.roomType) params.append('room_type', searchData.roomType);
+    return api.get(`/rooms/available?${params}`);
   }
 };
 
