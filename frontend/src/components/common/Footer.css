@@ -1,0 +1,27 @@
+.footer {
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer img {
+  width: 98px;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
