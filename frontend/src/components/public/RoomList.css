@@ -9,6 +9,12 @@
   border-radius: 28px;
   background: var(--white);
   box-shadow: 0 14px 42px rgba(15, 23, 42, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
 }
 
 .room-image {
@@ -55,14 +61,24 @@
   border-radius: 999px;
   color: var(--slate);
   font-weight: 800;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .room-button:hover {
   background: var(--slate);
   color: var(--white);
+  border-color: var(--slate);
 }
 
 @media (max-width: 960px) {
+  .room-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
   .room-grid {
     grid-template-columns: 1fr;
   }

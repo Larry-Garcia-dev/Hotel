@@ -5,6 +5,10 @@
   align-items: stretch;
 }
 
+.contact-copy .eyebrow {
+  margin: 0;
+}
+
 .contact-copy h2 {
   margin: 12px 0 0;
   max-width: 700px;
@@ -44,5 +48,11 @@
 @media (max-width: 960px) {
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .contact-card {
+    padding: 24px;
   }
 }

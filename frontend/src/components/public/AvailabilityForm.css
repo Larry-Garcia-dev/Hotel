@@ -6,12 +6,18 @@
   display: grid;
   grid-template-columns: minmax(200px, 0.55fr) minmax(0, 1.45fr);
   gap: 28px;
-  align-items: center;
+  align-items: start;
   border: 1px solid var(--line);
   border-radius: 32px;
   background: var(--white);
   padding: clamp(24px, 4vw, 38px);
   box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+}
+
+.availability-info {}
+
+.availability-info .eyebrow {
+  margin: 0;
 }
 
 .availability-panel h2 {
@@ -20,7 +26,7 @@
   line-height: 1.05;
 }
 
-.availability-panel > div > p:last-child {
+.availability-info > p:last-child {
   margin: 14px 0 0;
   color: var(--muted);
   line-height: 1.7;
@@ -60,6 +66,7 @@
   color: var(--slate);
   padding: 0 13px;
   font: inherit;
+  font-size: 0.95rem;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -126,6 +133,15 @@
   font-weight: 600;
 }
 
+/* Booking Form specific */
+.booking-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.booking-summary {
+  align-self: end;
+}
+
 .booking-summary .summary-box {
   display: flex;
   justify-content: space-between;
@@ -142,6 +158,7 @@
   font-size: 1.25rem;
 }
 
+/* Success Message */
 .success-message {
   text-align: center;
   padding: 20px;
@@ -181,6 +198,7 @@
   width: auto;
 }
 
+/* Responsive */
 @media (max-width: 960px) {
   .availability-panel {
     align-items: stretch;
@@ -190,10 +208,15 @@
   .availability-form {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  
+  .booking-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 620px) {
-  .availability-form {
+  .availability-form,
+  .booking-form {
     grid-template-columns: 1fr;
   }
   
