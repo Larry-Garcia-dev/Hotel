@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gateway Hotel | Washington, DC</title>
+    <meta
+      name="description"
+      content="Gateway Hotel offers comfortable rooms near Washington, DC landmarks, airports, and government agencies."
+    >
+    <style>
+      :root {
+        --paper: #f7f4ee;
+        --white: #ffffff;
+        --ink: #0f172a;
+        --muted: #5f6b7c;
+        --emerald: #0f5a3e;
+        --emerald-dark: #0d3d30;
+        --slate: #0f172a;
+        --gold: #d7a72f;
+        --gold-soft: #f4d47b;
+        --line: rgba(15, 23, 42, 0.08);
+        --shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .container {
+        width: min(100% - 32px, 1180px);
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(18px);
+      }
+
+      .header-inner {
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 10px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .brand img {
+        width: clamp(99px, 11.25vw, 143px);
+        height: auto;
+        display: block;
+      }
+
+      .brand-text {
+        min-width: 128px;
+      }
+
+      .brand-name {
+        margin: 0;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+
+      .brand-location {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(18px, 3vw, 34px);
+        color: #334155;
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .menu-toggle {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .menu-button {
+        display: none;
+        width: 42px;
+        height: 42px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--white);
+        cursor: pointer;
+      }
+
+      .menu-button span,
+      .menu-button span::before,
+      .menu-button span::after {
+        display: block;
+        width: 18px;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--slate);
+      }
+
+      .menu-button span {
+        position: relative;
+      }
+
+      .menu-button span::before,
+      .menu-button span::after {
+        content: "";
+        position: absolute;
+        left: 0;
+      }
+
+      .menu-button span::before {
+        top: -6px;
+      }
+
+      .menu-button span::after {
+        top: 6px;
+      }
+
+      .pill-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--emerald);
+        color: var(--white);
+        cursor: pointer;
+        font-weight: 800;
+        box-shadow: 0 12px 30px rgba(15, 90, 62, 0.22);
+      }
+
+      .pill-button:hover {
+        background: var(--emerald-dark);
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background:
+          radial-gradient(circle at 70% 10%, rgba(203, 161, 73, 0.3), transparent 35%),
+          linear-gradient(135deg, #0f2a3f 0%, #132f33 45%, var(--paper) 45%);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: -8%;
+        bottom: -28%;
+        z-index: -1;
+        width: min(760px, 72vw);
+        aspect-ratio: 1 / 1;
+        border: 2px solid rgba(215, 167, 47, 0.28);
+        border-radius: 50%;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+        gap: clamp(34px, 5vw, 72px);
+        align-items: center;
+        min-height: 660px;
+        padding: clamp(54px, 8vw, 108px) 0;
+      }
+
+      .hero-copy {
+        color: var(--white);
+        transform: translateY(-50px);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transform: translateY(-20px);
+        width: fit-content;
+        padding: 9px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 0.9rem;
+        font-weight: 700;
+        backdrop-filter: blur(12px);
+      }
+
+      h1 {
+        max-width: 720px;
+        margin: 22px 0 0;
+        color: #d6d9de;
+        font-size: clamp(3.15rem, 7vw, 6.9rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .hero-copy p {
+        max-width: 590px;
+        margin: 26px 0 0;
+        color: #c5cbd3;
+        font-size: 1.1rem;
+        line-height: 1.75;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .gold-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 28px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--gold);
+        color: var(--slate);
+        font-weight: 800;
+      }
+
+      .outline-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 28px;
+        border: 1px solid rgba(255, 255, 255, 0.32);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--emerald-dark);
+        font-weight: 800;
+      }
+
+      .hero-card {
+        overflow: hidden;
+        border-radius: 32px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card-top {
+        height: 288px;
+        padding: 24px;
+        background:
+          linear-gradient(180deg, rgba(15, 23, 42, 0.02), rgba(15, 23, 42, 0.86)),
+          url("content/front_entrance.jpeg") center / cover;
+        color: var(--white);
+      }
+
+      .hero-card-frame {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 22px;
+        backdrop-filter: blur(4px);
+      }
+
+      .hero-card-frame p {
+        margin: 0;
+        color: var(--gold-soft);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .hero-card-frame h2 {
+        margin: 12px 0 0;
+        font-size: 2rem;
+        line-height: 1.08;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: 22px;
+      }
+
+      .info-tile,
+      .amenity-card,
+      .attraction-card {
+        background: #f8fafc;
+        border: 1px solid var(--line);
+      }
+
+      .info-tile {
+        min-height: 100px;
+        border-radius: 22px;
+        padding: 18px;
+        color: #334155;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+
+      .tile-label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--emerald);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .section {
+        padding: clamp(54px, 7vw, 88px) 0;
+      }
+
+      .amenity-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .amenity-card {
+        min-height: 148px;
+        border-radius: 28px;
+        padding: 24px;
+        background: var(--white);
+        box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+      }
+
+      .amenity-icon {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        margin-bottom: 18px;
+        border-radius: 14px;
+        background: rgba(15, 90, 62, 0.1);
+        color: var(--emerald);
+        font-weight: 900;
+      }
+
+      .amenity-card p,
+      .room-card p,
+      .contact-copy p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .availability {
+        padding-top: 42px;
+      }
+
+      .availability-panel {
+        display: grid;
+        grid-template-columns: minmax(200px, 0.55fr) minmax(0, 1.45fr);
+        gap: 28px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 32px;
+        background: var(--white);
+        padding: clamp(24px, 4vw, 38px);
+        box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+      }
+
+      .availability-panel h2 {
+        margin: 10px 0 0;
+        font-size: clamp(1.6rem, 2.8vw, 2.35rem);
+        line-height: 1.05;
+      }
+
+      .availability-panel p {
+        margin: 14px 0 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .availability-form {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        column-gap: 18px;
+        row-gap: 16px;
+        align-items: end;
+        width: 100%;
+      }
+
+      .availability-field {
+        display: grid;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .availability-field label {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .availability-field input,
+      .availability-field select {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #f8fafc;
+        color: var(--slate);
+        padding: 0 13px;
+        font: inherit;
+      }
+
+      .availability-form .pill-button {
+        grid-column: 1 / -1;
+        min-height: 48px;
+        width: 100%;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 28px;
+        margin-bottom: 34px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--emerald);
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      .section-heading h2,
+      .contact-copy h2 {
+        margin: 12px 0 0;
+        max-width: 700px;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .section-heading > p {
+        max-width: 430px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .room-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .room-card {
+        overflow: hidden;
+        border-radius: 28px;
+        background: var(--white);
+        box-shadow: 0 14px 42px rgba(15, 23, 42, 0.08);
+      }
+
+      .room-image {
+        min-height: 230px;
+        background: #d9e2ea center / cover;
+      }
+
+      .room-image.double {
+        background-image: url("content/rooms/two_double_beds.jpg");
+      }
+
+      .room-image.king {
+        background-image: url("content/rooms/one_king_bed.jpg");
+      }
+
+      .room-image.accessible {
+        background-image: url("content/rooms/accessible_single_bed.jpg");
+      }
+
+      .room-body {
+        padding: 24px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 12px;
+        border-radius: 999px;
+        background: rgba(15, 90, 62, 0.08);
+        color: var(--emerald);
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .room-card h3 {
+        margin: 20px 0 10px;
+        font-size: 1.65rem;
+        line-height: 1.15;
+      }
+
+      .room-card .room-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        margin-top: 22px;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--slate);
+        font-weight: 800;
+      }
+
+      .nearby {
+        background: var(--white);
+      }
+
+      .attraction-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 30px;
+      }
+
+      .attraction-card {
+        overflow: hidden;
+        position: relative;
+        min-height: 112px;
+        display: flex;
+        align-items: end;
+        border-radius: 28px;
+        background: var(--paper);
+        padding: 24px;
+        font-size: 1.05rem;
+        font-weight: 800;
+      }
+
+      .attraction-card.thumbnail {
+        min-height: 180px;
+        background:
+          linear-gradient(180deg, rgba(15, 23, 42, 0.02), rgba(15, 23, 42, 0.74)),
+          var(--paper);
+        color: var(--white);
+      }
+
+      .attraction-card.thumbnail img {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .attraction-card.thumbnail span {
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+        gap: 36px;
+        align-items: stretch;
+      }
+
+      .contact-card {
+        border-radius: 32px;
+        background: var(--slate);
+        color: var(--white);
+        padding: clamp(28px, 4vw, 42px);
+      }
+
+      .contact-card h3 {
+        margin: 0;
+        font-size: 1.55rem;
+      }
+
+      .contact-card p {
+        margin: 16px 0 0;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.7;
+      }
+
+      .footer {
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
+        background: var(--white);
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .footer img {
+        width: 98px;
+        height: auto;
+        display: block;
+      }
+
+      @media (max-width: 960px) {
+        .header-inner,
+        .section-heading,
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav {
+          width: 100%;
+          overflow-x: auto;
+          padding-bottom: 4px;
+        }
+
+        .hero-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-grid {
+          min-height: auto;
+        }
+
+        .amenity-grid,
+        .availability-panel,
+        .attraction-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .availability-panel {
+          align-items: stretch;
+          grid-template-columns: 1fr;
+        }
+
+        .availability-form {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .room-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .container {
+          width: min(100% - 24px, 1180px);
+        }
+
+        .brand-text {
+          display: none;
+        }
+
+        .header-inner {
+          align-items: center;
+          flex-direction: row;
+          flex-wrap: wrap;
+          min-height: 62px;
+          gap: 10px;
+        }
+
+        .menu-button {
+          display: inline-flex;
+          order: 2;
+        }
+
+        .header-inner > .pill-button {
+          order: 3;
+          min-height: 40px;
+          padding: 0 16px;
+        }
+
+        .brand {
+          order: 1;
+          margin-right: auto;
+        }
+
+        .nav {
+          order: 4;
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          overflow: visible;
+          padding: 8px 0 4px;
+        }
+
+        .nav a {
+          padding: 13px 4px;
+          border-top: 1px solid var(--line);
+        }
+
+        .menu-toggle:checked ~ .nav {
+          display: flex;
+        }
+
+        .hero-grid {
+          padding: 48px 0;
+        }
+
+        .hero::before {
+          background: linear-gradient(150deg, #0f2a3f 0%, #132f33 70%, var(--paper) 70%);
+        }
+
+        .hero-card-top {
+          height: 240px;
+        }
+
+        .info-grid,
+        .amenity-grid,
+        .availability-form,
+        .attraction-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#" aria-label="Gateway Hotel home">
+          <img src="content/logo_gatewayhotel.png" alt="Gateway Hotel">
+        </a>
+        <input class="menu-toggle" id="mobile-menu-toggle" type="checkbox">
+        <label class="menu-button" for="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <span aria-hidden="true"></span>
+        </label>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#rooms">Rooms</a>
+          <a href="#location">Location</a>
+          <a href="#attractions">Attractions</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="pill-button" href="#availability">Book Now</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="location" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="badge">Comfortable rooms near DC landmarks</div>
+            <h1 id="hero-title">A modern stay with easy access to Washington, DC.</h1>
+            <p>
+              Gateway Hotel offers convenient lodging near major airports,
+              government agencies, and the city's best-known attractions.
+            </p>
+            <div class="hero-actions">
+              <a class="outline-button" href="#rooms">View Rooms</a>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Hotel overview">
+            <div class="hero-card-top">
+              <div class="hero-card-frame">
+                <p>Gateway Hotel</p>
+                <h2>Rest easy. Explore more.</h2>
+              </div>
+            </div>
+            <div class="info-grid">
+              <div class="info-tile">
+                <span class="tile-label">Address</span>
+                2700 New York Avenue NE
+              </div>
+              <div class="info-tile">
+                <span class="tile-label">Phone</span>
+                +1 202-832-5800
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section availability" id="availability">
+        <div class="container availability-panel">
+          <div>
+            <p class="eyebrow">Availability</p>
+            <h2>Find your room.</h2>
+            <p>Search dates, guests, and room type for your upcoming Gateway Hotel stay.</p>
+          </div>
+          <form class="availability-form">
+            <div class="availability-field">
+              <label for="check-in">Check In</label>
+              <input id="check-in" name="check-in" type="date">
+            </div>
+            <div class="availability-field">
+              <label for="check-out">Check Out</label>
+              <input id="check-out" name="check-out" type="date">
+            </div>
+            <div class="availability-field">
+              <label for="guest-count">Guests</label>
+              <select id="guest-count" name="guest-count">
+                <option>1 Guest</option>
+                <option selected>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+              </select>
+            </div>
+            <div class="availability-field">
+              <label for="children-count">Children</label>
+              <select id="children-count" name="children-count">
+                <option selected>0 Children</option>
+                <option>1 Child</option>
+                <option>2 Children</option>
+                <option>3 Children</option>
+                <option>4 Children</option>
+              </select>
+            </div>
+            <div class="availability-field">
+              <label for="room-type">Room Type</label>
+              <select id="room-type" name="room-type">
+                <option selected>Any Room</option>
+                <option>One King Bed</option>
+                <option>Two Double Beds</option>
+                <option>Accessible Room</option>
+              </select>
+            </div>
+            <button class="pill-button" type="submit">Search Rooms</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section" id="rooms">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Rooms</p>
+              <h2>Simple, comfortable, ready for your stay.</h2>
+            </div>
+            <p>
+              Each room includes air conditioning, private bathroom,
+              fridge/microwave, LCD TV, and essentials for a practical stay.
+            </p>
+          </div>
+
+          <div class="room-grid">
+            <article class="room-card">
+              <div class="room-image double" aria-hidden="true"></div>
+              <div class="room-body">
+                <span class="tag">Up to 4 guests</span>
+                <h3>Two Double Beds</h3>
+                <p>Room for families or small groups, with space to relax after a day in Washington, DC.</p>
+                <a class="room-button" href="#contact">Book This Room</a>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <div class="room-image king" aria-hidden="true"></div>
+              <div class="room-body">
+                <span class="tag">Best for 1-2 guests</span>
+                <h3>One King Bed</h3>
+                <p>A comfortable option for solo travelers or couples looking for a quiet stay.</p>
+                <a class="room-button" href="#contact">Book This Room</a>
+              </div>
+            </article>
+
+            <article class="room-card">
+              <div class="room-image accessible" aria-hidden="true"></div>
+              <div class="room-body">
+                <span class="tag">Accessible stay</span>
+                <h3>Accessible Room</h3>
+                <p>ADA-friendly room designed for easier access and a more comfortable experience.</p>
+                <a class="room-button" href="#contact">Book This Room</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section nearby" id="attractions">
+        <div class="container">
+          <p class="eyebrow">Nearby</p>
+          <h2>Explore Washington, DC.</h2>
+          <div class="attraction-grid">
+            <div class="attraction-card thumbnail">
+              <img src="content/attractions/capitol_hill.png" alt="Capitol Hill">
+              <span>Capitol Hill</span>
+            </div>
+            <div class="attraction-card thumbnail">
+              <img src="content/attractions/national_arboretum.jpg" alt="National Arboretum">
+              <span>National Arboretum</span>
+            </div>
+            <div class="attraction-card thumbnail">
+              <img src="content/attractions/national_zoo.jpg" alt="National Zoo">
+              <span>National Zoo</span>
+            </div>
+            <div class="attraction-card thumbnail">
+              <img src="content/attractions/smithsonian.jpg" alt="Smithsonian Museums">
+              <span>Smithsonian Museums</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container contact-grid">
+          <div class="contact-copy">
+            <p class="eyebrow">Contact</p>
+            <h2>Ready to plan your stay?</h2>
+            <p>Call the hotel or book online for availability and room options.</p>
+          </div>
+          <div class="contact-card">
+            <h3>Gateway Hotel</h3>
+            <p>2700 New York Avenue NE</p>
+            <p>+1 202 832 5800 · 1-800-324-9832</p>
+            <a class="gold-button" href="tel:+12028325800">Book Now</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <img src="content/logo_gatewayhotel.png" alt="Gateway Hotel">
+        <span>Gateway Hotel · Washington, DC · Reservations · Guest Services</span>
+      </div>
+    </footer>
+  </body>
+</html>
