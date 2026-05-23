@@ -1,0 +1,50 @@
+.contact {
+  background: var(--paper);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.contact-info h2 {
+  margin: 12px 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+}
+
+.contact-info > p:last-child {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.contact-card {
+  padding: 40px;
+  background: var(--slate);
+  border-radius: 32px;
+  color: var(--white);
+}
+
+.contact-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.contact-card p {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+}
+
+.contact-card .btn {
+  margin-top: 28px;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

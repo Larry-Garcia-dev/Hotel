@@ -1,0 +1,46 @@
+.amenities {
+  padding-top: 0;
+}
+
+.amenity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.amenity-card {
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
+}
+
+.amenity-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: rgba(15, 90, 62, 0.1);
+  color: var(--emerald);
+}
+
+.amenity-label {
+  margin: 0;
+  font-weight: 700;
+}
+
+@media (max-width: 960px) {
+  .amenity-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .amenity-grid {
+    grid-template-columns: 1fr;
+  }
+}

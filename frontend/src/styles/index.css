@@ -1,0 +1,144 @@
+:root {
+  --paper: #f7f4ee;
+  --white: #ffffff;
+  --ink: #0f172a;
+  --muted: #5f6b7c;
+  --emerald: #0f5a3e;
+  --emerald-dark: #0d3d30;
+  --slate: #0f172a;
+  --gold: #d7a72f;
+  --gold-soft: #f4d47b;
+  --line: rgba(15, 23, 42, 0.08);
+  --shadow: 0 24px 70px rgba(15, 23, 42, 0.16);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: min(100% - 32px, 1180px);
+  margin: 0 auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--emerald);
+  color: var(--white);
+  box-shadow: 0 12px 30px rgba(15, 90, 62, 0.22);
+}
+
+.btn-primary:hover {
+  background: var(--emerald-dark);
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--slate);
+}
+
+.btn-gold:hover {
+  background: #c49926;
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: var(--emerald-dark);
+}
+
+.btn-outline:hover {
+  background: var(--white);
+}
+
+.card {
+  background: var(--white);
+  border-radius: 28px;
+  box-shadow: 0 14px 42px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fafc;
+  color: var(--slate);
+  font: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--emerald);
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  color: var(--emerald);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 0;
+  }
+}

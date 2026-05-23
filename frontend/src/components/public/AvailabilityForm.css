@@ -1,0 +1,106 @@
+.availability {
+  padding-top: 0;
+}
+
+.availability-panel {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.45fr) minmax(0, 1.55fr);
+  gap: 36px;
+  align-items: center;
+  padding: 40px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.08);
+}
+
+.availability-info h2 {
+  margin: 12px 0 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.1;
+}
+
+.availability-info p:last-child {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.availability-form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: end;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-full {
+  grid-column: 1 / -1;
+}
+
+.no-rooms {
+  margin-top: 24px;
+  padding: 24px;
+  background: #fef2f2;
+  border-radius: 16px;
+  text-align: center;
+  color: #991b1b;
+}
+
+.available-rooms {
+  margin-top: 32px;
+}
+
+.available-rooms h3 {
+  margin-bottom: 20px;
+}
+
+.available-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.available-room-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.room-number {
+  font-weight: 800;
+  color: var(--emerald);
+}
+
+.room-type {
+  margin-left: 12px;
+  color: var(--muted);
+}
+
+.room-price {
+  font-weight: 700;
+}
+
+@media (max-width: 960px) {
+  .availability-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .availability-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .availability-form {
+    grid-template-columns: 1fr;
+  }
+}
