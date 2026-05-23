@@ -70,4 +70,18 @@ export async function checkAvailability(req, res) {
   }
 }
 
-export default { getAll, getById, create, update, remove, checkAvailability };
+export async function getAvailable(req, res) {
+  try {
+    const { check_in, check_out, room_type } = req.query;
+    if (!check_in || !check_out) {
+      return res.status(400).json({ error: 'Check-in and check-out dates required' });
+    }
+    const rooms = await roomModel.findAvailable(check_in, check_out, room_type);
+    res.json(rooms);
+  } catch (error) {
+    console.error('Error finding available rooms:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+}
+
+export default { getAll, getById, create, update, remove, checkAvailability, getAvailable };

@@ -28,7 +28,7 @@
 
 .availability-form {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 18px;
   row-gap: 16px;
   align-items: end;
@@ -50,7 +50,8 @@
 }
 
 .availability-field input,
-.availability-field select {
+.availability-field select,
+.availability-field textarea {
   width: 100%;
   min-height: 48px;
   border: 1px solid var(--line);
@@ -59,12 +60,125 @@
   color: var(--slate);
   padding: 0 13px;
   font: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.availability-field textarea {
+  padding: 13px;
+  resize: vertical;
+  min-height: 70px;
+}
+
+.availability-field input:focus,
+.availability-field select:focus,
+.availability-field textarea:focus {
+  outline: none;
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.availability-field.full-width {
+  grid-column: 1 / -1;
 }
 
 .availability-form .pill-button {
   grid-column: 1 / -1;
   min-height: 48px;
   width: 100%;
+}
+
+.pill-button.outline {
+  background: transparent;
+  color: var(--emerald);
+  border: 2px solid var(--emerald);
+  box-shadow: none;
+}
+
+.pill-button.outline:hover {
+  background: var(--emerald);
+  color: white;
+}
+
+.pill-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+}
+
+.form-buttons .pill-button {
+  flex: 1;
+  grid-column: unset;
+}
+
+.form-error {
+  grid-column: 1 / -1;
+  color: #dc2626;
+  background: #fef2f2;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.booking-summary .summary-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 16px;
+  background: linear-gradient(135deg, var(--emerald), #047857);
+  color: white;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.booking-summary .summary-box strong {
+  font-size: 1.25rem;
+}
+
+.success-message {
+  text-align: center;
+  padding: 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, var(--emerald), #047857);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.success-message h3 {
+  margin: 0 0 12px;
+  color: var(--slate);
+  font-size: 1.5rem;
+}
+
+.success-message p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.success-message .pill-button {
+  display: inline-block;
+  width: auto;
 }
 
 @media (max-width: 960px) {
@@ -81,5 +195,9 @@
 @media (max-width: 620px) {
   .availability-form {
     grid-template-columns: 1fr;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
   }
 }
