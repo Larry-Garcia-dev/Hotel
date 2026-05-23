@@ -10,6 +10,7 @@ import RoomsPage from './pages/admin/RoomsPage';
 import ReservationsPage from './pages/admin/ReservationsPage';
 import InventoryPage from './pages/admin/InventoryPage';
 import GuestsPage from './pages/admin/GuestsPage';
+import ChatBubble from './components/common/ChatBubble';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -105,6 +106,7 @@ function App() {
           }
         />
       </Routes>
+      <ChatBubble />
     </BrowserRouter>
   );
 }

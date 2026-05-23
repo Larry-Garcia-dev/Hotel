@@ -115,6 +115,32 @@ const tables = [
       FOREIGN KEY (item_id) REFERENCES inventory_items(id) ON DELETE CASCADE,
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
     )`
+  },
+  {
+    name: 'chat_sessions',
+    sql: `CREATE TABLE IF NOT EXISTS chat_sessions (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      session_id VARCHAR(100) NOT NULL UNIQUE,
+      guest_name VARCHAR(200),
+      guest_email VARCHAR(255) NOT NULL,
+      status ENUM('active', 'closed') DEFAULT 'active',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      INDEX idx_email (guest_email),
+      INDEX idx_session (session_id)
+    )`
+  },
+  {
+    name: 'chat_messages',
+    sql: `CREATE TABLE IF NOT EXISTS chat_messages (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      session_id VARCHAR(100) NOT NULL,
+      role ENUM('user', 'assistant', 'system') NOT NULL,
+      content TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      INDEX idx_session_messages (session_id),
+      FOREIGN KEY (session_id) REFERENCES chat_sessions(session_id) ON DELETE CASCADE
+    )`
   }
 ];
 

@@ -5,6 +5,7 @@ import roomRoutes from './roomRoutes.js';
 import reservationRoutes from './reservationRoutes.js';
 import guestRoutes from './guestRoutes.js';
 import inventoryRoutes from './inventoryRoutes.js';
+import chatRoutes from './chatRoutes.js';
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.use('/rooms', roomRoutes);
 router.use('/reservations', reservationRoutes);
 router.use('/guests', guestRoutes);
 router.use('/inventory', inventoryRoutes);
+router.use('/chat', chatRoutes);
 
 export default router;
